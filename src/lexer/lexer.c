@@ -5,6 +5,8 @@
 
 static token_t generate_number(lexer_text_t *text);
 
+// next takes a pointer to a pointer and increments it, so when you use *text
+// (out of the function) it access the next character
 static void next(lexer_text_t *text)
 {
     (*text)++;
