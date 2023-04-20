@@ -7,6 +7,9 @@ SRC = $(shell find ./src -name "*.c")
 $(TARGET): dir
 	$(CC) -o ./$(DIR_TARGET)/$(TARGET) $(SRC) $(CC_FLAGS)
 
+debug: dir
+	$(CC) -o ./$(DIR_TARGET)/$(TARGET) $(SRC) $(CC_FLAGS) -g
+
 run: $(TARGET)
 	./$(DIR_TARGET)/$(TARGET)
 
