@@ -3,6 +3,8 @@
 
 #include <stdlib.h>
 
+#define START_LIST_SIZE 5
+
 char WHITESPACES[4];
 char DIGITS[11];
 
@@ -29,5 +31,13 @@ typedef struct token_list_t
     size_t size;
     size_t capacity;
 } token_list_t;
+
+token_list_t *new_token_list();
+
+token_list_t *token_list_append_token(token_list_t *tokens, token_t new_token);
+
+void token_list_print(token_list_t *tokens);
+
+void delete_token_list(token_list_t *tokens);
 
 #endif // TOKENS_H

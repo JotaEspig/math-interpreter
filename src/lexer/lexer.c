@@ -13,13 +13,10 @@ static void next(lexer_text_t *text)
 token_list_t *generate_tokens(lexer_text_t text)
 {
     token_t token;
-    token_list_t *tokens = (token_list_t *)malloc(sizeof(token_list_t));
+    // initialize list of tokens
+    token_list_t *tokens = new_token_list();
     if (tokens == NULL)
         return NULL;
-
-    tokens->arr = (token_t *)calloc(START_LIST_SIZE, sizeof(token_t));
-    tokens->capacity = 5;
-    tokens->size = 0;
 
     while (*text != 0)
     {
@@ -36,20 +33,10 @@ token_list_t *generate_tokens(lexer_text_t text)
             token = generate_number(&text);
         }
 
-        // adds the token to the list
-        if (tokens->size == tokens->capacity)
-        {
-            size_t new_capacity = tokens->capacity * 2;
-            token_t *new_arr = (token_t *)
-                realloc(tokens->arr, sizeof(token_t) * new_capacity);
-            if (new_arr == NULL)
-                return NULL;
+        tokens = token_list_append_token(tokens, token);
+        if (tokens == NULL)
+            return NULL;
 
-            tokens->arr = new_arr;
-            tokens->capacity = new_capacity;
-        }
-        tokens->arr[tokens->size] = token;
-        tokens->size++;
         next(&text);
     }
 

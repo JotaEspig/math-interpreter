@@ -15,6 +15,8 @@ int main()
         exit(1);
     }
     printf("%s\n", buff);
-    generate_tokens(buff);
+    token_list_t *tokens = generate_tokens(buff);
+    token_list_print(tokens);
+    delete_token_list(tokens);
     return 0;
 }
