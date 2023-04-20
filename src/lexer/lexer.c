@@ -27,10 +27,11 @@ token_list_t *generate_tokens(lexer_text_t text)
         // if char is a whitespace do nothing
         if (strstr(WHITESPACES, current_char) != NULL)
         {
-            goto next_char;
+            next(&text);
+            *current_char = *text;
+            continue;
         }
-        else if (strstr(DIGITS, current_char) != NULL ||
-                 *current_char == MINUS_CHAR)
+        else if (strstr(DIGITS, current_char) != NULL)
         {
             token = generate_number(&text);
         }
@@ -38,10 +39,6 @@ token_list_t *generate_tokens(lexer_text_t text)
         tokens = token_list_append_token(tokens, token);
         if (tokens == NULL)
             return NULL;
-
-    next_char:
-        next(&text);
-        *current_char = *text;
     }
 
     return tokens;
@@ -62,13 +59,6 @@ static token_t generate_number(lexer_text_t *text)
         buff[strlen(buff)] = *current_char;
         next(text);
         *current_char = **text;
-    }
-    if (*current_char == MINUS_CHAR)
-    {
-        printf("Invalid Sintax: %s\n"
-               ".................▲\n",
-               --(*text));
-        exit(1);
     }
 
     token_t token;
