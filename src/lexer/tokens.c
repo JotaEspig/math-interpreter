@@ -3,8 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char WHITESPACES[4] = " \n\t";
-char DIGITS[11] = "0123456789";
+const char WHITESPACES[4] = " \n\t";
+const char DIGITS[11] = "0123456789";
+const char MINUS_CHAR = '-';
 
 token_list_t *new_token_list()
 {

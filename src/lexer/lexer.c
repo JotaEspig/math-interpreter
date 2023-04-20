@@ -27,11 +27,10 @@ token_list_t *generate_tokens(lexer_text_t text)
         // if char is a whitespace do nothing
         if (strstr(WHITESPACES, current_char) != NULL)
         {
-            next(&text);
-            *current_char = *text;
-            continue;
+            goto next_char;
         }
-        else if (strstr(DIGITS, current_char) != NULL)
+        else if (strstr(DIGITS, current_char) != NULL ||
+                 *current_char == MINUS_CHAR)
         {
             token = generate_number(&text);
         }
@@ -40,6 +39,7 @@ token_list_t *generate_tokens(lexer_text_t text)
         if (tokens == NULL)
             return NULL;
 
+    next_char:
         next(&text);
         *current_char = *text;
     }
@@ -52,6 +52,7 @@ static token_t generate_number(lexer_text_t *text)
     char *buff = (char *)calloc(128, sizeof(char));
 
     char current_char[] = {**text};
+
     *buff = *current_char;
 
     next(text);

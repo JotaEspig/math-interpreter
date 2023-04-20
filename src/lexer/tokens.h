@@ -5,8 +5,9 @@
 
 #define START_LIST_SIZE 5
 
-char WHITESPACES[4];
-char DIGITS[11];
+extern const char WHITESPACES[4];
+extern const char DIGITS[11];
+extern const char MINUS_CHAR;
 
 enum token_type
 {
