@@ -20,14 +20,14 @@ token_list_t *generate_tokens(lexer_text_t text)
     if (tokens == NULL)
         return NULL;
 
-    while (*text != 0)
+    char current_char[] = {*text};
+    while (*current_char != 0)
     {
-        // TODO check if it's possible to omit 0 and use just *text
-        char current_char[] = {*text, 0};
         // if char is a whitespace do nothing
         if (strstr(WHITESPACES, current_char) != NULL)
         {
             next(&text);
+            *current_char = *text;
             continue;
         }
         else if (strstr(DIGITS, current_char) != NULL)
@@ -40,6 +40,7 @@ token_list_t *generate_tokens(lexer_text_t text)
             return NULL;
 
         next(&text);
+        *current_char = *text;
     }
 
     return tokens;
@@ -49,16 +50,16 @@ static token_t generate_number(lexer_text_t *text)
 {
     char *buff = (char *)calloc(128, sizeof(char));
 
-    char current_char[] = {**text, 0};
-    buff[0] = current_char[0];
-    next(text);
+    char current_char[] = {**text};
+    *buff = *current_char;
 
-    current_char[0] = **text;
-    while (current_char[0] != 0 && strstr(DIGITS, current_char))
+    next(text);
+    *current_char = **text;
+    while (*current_char != 0 && strstr(DIGITS, current_char))
     {
-        buff[strlen(buff)] = **text;
+        buff[strlen(buff)] = *current_char;
         next(text);
-        current_char[0] = **text;
+        *current_char = **text;
     }
 
     token_t token;
