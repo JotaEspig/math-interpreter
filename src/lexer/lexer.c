@@ -1,5 +1,6 @@
 #include "lexer.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -60,6 +61,13 @@ static token_t generate_number(lexer_text_t *text)
         buff[strlen(buff)] = *current_char;
         next(text);
         *current_char = **text;
+    }
+    if (*current_char == MINUS_CHAR)
+    {
+        printf("Invalid Sintax: %s\n"
+               ".................▲\n",
+               --(*text));
+        exit(1);
     }
 
     token_t token;
