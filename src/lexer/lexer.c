@@ -35,6 +35,11 @@ token_list_t *generate_tokens(lexer_text_t text)
         {
             token = generate_number(&text);
         }
+        else
+        {
+            printf("Invalid sintax\n");
+            exit(1);
+        }
 
         tokens = token_list_append_token(tokens, token);
         if (tokens == NULL)
