@@ -16,6 +16,8 @@ static void next(lexer_text_t *text)
 token_list_t *generate_tokens(lexer_text_t text)
 {
     token_t token;
+    token.value = 0;
+
     // initialize list of tokens
     token_list_t *tokens = new_token_list();
     if (tokens == NULL)
@@ -24,7 +26,6 @@ token_list_t *generate_tokens(lexer_text_t text)
     char current_char[] = {*text};
     while (*current_char != 0)
     {
-        // if char is a whitespace do nothing
         if (strstr(WHITESPACES, current_char) != NULL)
         {
             next(&text);
@@ -35,9 +36,40 @@ token_list_t *generate_tokens(lexer_text_t text)
         {
             token = generate_number(&text);
         }
+        // TODO Try to minimize the ifs statements or use a separated function to handle it
+        else if (*current_char == PLUS_CHAR)
+        {
+            token.type = PLUS;
+            next(&text);
+        }
+        else if (*current_char == MINUS_CHAR)
+        {
+            token.type = MINUS;
+            next(&text);
+        }
+        else if (*current_char == MULTIPLY_CHAR)
+        {
+            token.type = MULTIPLY;
+            next(&text);
+        }
+        else if (*current_char == DIVIDE_CHAR)
+        {
+            token.type = DIVIDE;
+            next(&text);
+        }
+        else if (*current_char == LPAREN_CHAR)
+        {
+            token.type = LPAREN;
+            next(&text);
+        }
+        else if (*current_char == RPAREN_CHAR)
+        {
+            token.type = RPAREN;
+            next(&text);
+        }
         else
         {
-            printf("Invalid sintax\n");
+            printf("Invalid syntax\n");
             exit(1);
         }
 

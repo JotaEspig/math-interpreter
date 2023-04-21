@@ -5,7 +5,12 @@
 
 const char WHITESPACES[4] = " \n\t";
 const char DIGITS[11] = "0123456789";
+const char PLUS_CHAR = '+';
 const char MINUS_CHAR = '-';
+const char MULTIPLY_CHAR = '*';
+const char DIVIDE_CHAR = '/';
+const char LPAREN_CHAR = '(';
+const char RPAREN_CHAR = ')';
 
 token_list_t *new_token_list()
 {

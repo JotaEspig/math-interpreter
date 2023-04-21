@@ -7,7 +7,12 @@
 
 extern const char WHITESPACES[4];
 extern const char DIGITS[11];
+extern const char PLUS_CHAR;
 extern const char MINUS_CHAR;
+extern const char MULTIPLY_CHAR;
+extern const char DIVIDE_CHAR;
+extern const char LPAREN_CHAR;
+extern const char RPAREN_CHAR;
 
 enum token_type
 {
