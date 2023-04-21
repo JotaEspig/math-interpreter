@@ -44,6 +44,8 @@ token_list_t *generate_tokens(lexer_text_t text)
         tokens = token_list_append_token(tokens, token);
         if (tokens == NULL)
             return NULL;
+
+        *current_char = *text;
     }
 
     return tokens;
