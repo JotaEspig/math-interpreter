@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "lexer/lexer.h"
+#include "parser/parser.h"
 
 int main()
 {
@@ -17,6 +18,9 @@ int main()
     printf("%s\n", buff);
     token_list_t *tokens = generate_tokens(buff);
     token_list_print(tokens);
-    delete_token_list(tokens);
+
+    parser_t *parser = new_parser(tokens);
+    parser_generate_ast(parser);
+
     return 0;
 }
