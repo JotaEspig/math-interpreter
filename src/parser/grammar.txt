@@ -1,3 +1,3 @@
-Expression := Term + Expression | Term - Expression | Term
-Term       := Factor * Term     | Factor / Term     | Factor
-Factor     := Number            | ( Expression )    | +Factor | -Factor
+Expression := Term {+ | - Term} 
+Term       := Factor {*|/ Factor}
+Factor     := Number | ( Expression ) | +Factor | -Factor
