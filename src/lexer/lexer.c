@@ -1,6 +1,5 @@
 #include "lexer.h"
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -70,7 +69,6 @@ token_list_t *generate_tokens(lexer_text_t text)
         }
         else
         {
-            printf("Invalid syntax\n");
             return NULL;
         }
 
