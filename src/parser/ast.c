@@ -65,6 +65,32 @@ ast_node_t *new_divide_node(ast_node_t *left, ast_node_t *right)
     return node;
 }
 
+ast_node_t *new_positive_node(ast_node_t *child)
+{
+    token_t token;
+    token.type = PLUS;
+    token.value = 0;
+
+    ast_node_t *node = (ast_node_t *)malloc(sizeof(ast_node_t));
+    node->token = token;
+    node->left = NULL;
+    node->right = child;
+    return node;
+}
+
+ast_node_t *new_negative_node(ast_node_t *child)
+{
+    token_t token;
+    token.type = MINUS;
+    token.value = 0;
+
+    ast_node_t *node = (ast_node_t *)malloc(sizeof(ast_node_t));
+    node->token = token;
+    node->left = NULL;
+    node->right = child;
+    return node;
+}
+
 void delete_ast(ast_node_t *node)
 {
     if (node == NULL)

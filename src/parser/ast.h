@@ -21,6 +21,10 @@ ast_node_t *new_multiply_node(ast_node_t *left, ast_node_t *right);
 
 ast_node_t *new_divide_node(ast_node_t *left, ast_node_t *right);
 
+ast_node_t *new_positive_node(ast_node_t *child);
+
+ast_node_t *new_negative_node(ast_node_t *child);
+
 void delete_ast(ast_node_t *node);
 
 #endif // AST_H
