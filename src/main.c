@@ -2,10 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "lexer/tokens.h"
 #include "lexer/lexer.h"
 #include "parser/parser.h"
 #include "parser/ast.h"
-
+#include "evaluator/evaluator.h"
 int main()
 {
     lexer_text_t buff = (lexer_text_t)malloc(sizeof(char) * 128);
@@ -22,6 +23,8 @@ int main()
 
     parser_t *parser = new_parser(tokens);
     ast_node_t *ast = parser_generate_ast(parser);
+    int result = evaluate_ast(ast);
+    printf("Result of the operation: %d\n", result);
 
     return 0;
 }
