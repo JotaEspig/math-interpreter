@@ -4,6 +4,7 @@
 
 #include "lexer/lexer.h"
 #include "parser/parser.h"
+#include "parser/ast.h"
 
 int main()
 {
@@ -20,7 +21,7 @@ int main()
     token_list_print(tokens);
 
     parser_t *parser = new_parser(tokens);
-    parser_generate_ast(parser);
+    ast_node_t *ast = parser_generate_ast(parser);
 
     return 0;
 }
