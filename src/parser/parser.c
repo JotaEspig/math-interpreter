@@ -102,13 +102,32 @@ ast_node_t *parser_parse_factor(parser_t *parser)
     {
         next(parser);
         result = parser_parse_expr(parser);
-        if (parser->current_token.type == RPAREN)
-        {
-            next(parser);
-            return result;
-        }
+        if (parser->current_token.type != RPAREN)
+            return NULL;
 
-        return NULL;
+        next(parser);
+        return result;
+    }
+
+    if (parser->current_token.type == PLUS)
+    {
+        next(parser);
+        ast_node_t *child = parser_parse_factor(parser);
+        if (child == NULL)
+            return NULL;
+
+        result = new_positive_node(child);
+        return result;
+    }
+    if (parser->current_token.type == MINUS)
+    {
+        next(parser);
+        ast_node_t *child = parser_parse_factor(parser);
+        if (child == NULL)
+            return NULL;
+
+        result = new_negative_node(child);
+        return result;
     }
 
     if (parser->current_token.type != NUMBER)
