@@ -16,7 +16,6 @@ static void next(lexer_text_t *text)
 token_list_t *generate_tokens(lexer_text_t text)
 {
     token_t token;
-    token.value = 0;
 
     // initialize list of tokens
     token_list_t *tokens = new_token_list();
@@ -26,6 +25,8 @@ token_list_t *generate_tokens(lexer_text_t text)
     char current_char[] = {*text};
     while (*current_char != 0)
     {
+        token.type = INVALID;
+        token.value = 0;
         if (strstr(WHITESPACES, current_char) != NULL)
         {
             next(&text);
@@ -80,6 +81,10 @@ token_list_t *generate_tokens(lexer_text_t text)
         *current_char = *text;
     }
 
+    token_t end_token;
+    end_token.type = INVALID;
+    end_token.value = 0;
+    tokens = token_list_append_token(tokens, end_token);
     return tokens;
 }
 

@@ -16,7 +16,8 @@ extern const char RPAREN_CHAR;
 
 enum token_type
 {
-    NUMBER = 1,
+    INVALID,
+    NUMBER,
     PLUS,
     MINUS,
     MULTIPLY,
