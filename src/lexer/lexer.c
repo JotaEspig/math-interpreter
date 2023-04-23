@@ -71,7 +71,7 @@ token_list_t *generate_tokens(lexer_text_t text)
         else
         {
             printf("Invalid syntax\n");
-            exit(1);
+            return NULL;
         }
 
         tokens = token_list_append_token(tokens, token);

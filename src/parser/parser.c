@@ -22,6 +22,9 @@ static void next(parser_t *parser)
 
 ast_node_t *parser_generate_ast(parser_t *parser)
 {
+    if (parser == NULL)
+        return NULL;
+
     ast_node_t *result = parser_parse_expr(parser);
     return result;
 }
