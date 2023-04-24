@@ -21,7 +21,9 @@ int main()
     while (1)
     {
         printf("> ");
-        fgets(buff, 128, stdin);
+        if (!fgets(buff, 128, stdin))
+            exit(1);
+
         buff[strcspn(buff, "\n")] = 0; // removes \n
         if (strcmp(buff, "q") == 0 || strcmp(buff, "exit") == 0)
             exit(0);
