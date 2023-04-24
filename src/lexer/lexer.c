@@ -21,7 +21,7 @@ token_list_t *generate_tokens(lexer_text_t text)
     if (tokens == NULL)
         return NULL;
 
-    char current_char[] = {*text};
+    char current_char[2] = {*text};
     while (*current_char != 0)
     {
         token.type = INVALID;
@@ -90,7 +90,7 @@ static token_t generate_number(lexer_text_t *text)
 {
     char *buff = (char *)calloc(128, sizeof(char));
 
-    char current_char[] = {**text};
+    char current_char[2] = {**text};
 
     *buff = *current_char;
 
