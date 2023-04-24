@@ -14,13 +14,13 @@ int evaluate_ast(ast_node_t *node)
         return node->token.value;
 
     case PLUS:
-        return evaluate_ast(node->left) + evaluate_ast(node->right);
+        return evaluate_ast(node->left) + (unsigned)evaluate_ast(node->right);
 
     case MINUS:
-        return evaluate_ast(node->left) - evaluate_ast(node->right);
+        return evaluate_ast(node->left) - (unsigned)evaluate_ast(node->right);
 
     case MULTIPLY:
-        return evaluate_ast(node->left) * evaluate_ast(node->right);
+        return evaluate_ast(node->left) * (unsigned)evaluate_ast(node->right);
 
     case DIVIDE:
         return evaluate_ast(node->left) / evaluate_ast(node->right);
