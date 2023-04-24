@@ -34,6 +34,7 @@ int main()
             continue;
         }
 
+        // TODO Prevent memory leaks
         token_list_t *tokens = generate_tokens(buff);
         //printf("TOKENS:\n");
         //token_list_print(tokens);
