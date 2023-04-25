@@ -120,7 +120,10 @@ ast_node_t *parser_parse_factor(parser_t *parser)
         next(parser);
         result = parser_parse_expr(parser);
         if (parser->current_token.type != RPAREN)
+        {
+            delete_ast(result);
             return NULL;
+        }
 
         next(parser);
         return result;

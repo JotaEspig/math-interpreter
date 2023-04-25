@@ -37,7 +37,6 @@ int main()
             continue;
         }
 
-        // TODO Prevent memory leaks
         tokens = generate_tokens(buff);
         //printf("TOKENS:\n");
         //token_list_print(tokens);
@@ -63,8 +62,6 @@ int main()
             delete_ast(ast);
     }
 
-    // Memory leak still occurs caused by some thing inside parser
-    // Example: "- (00" causes memory leak
     free(buff);
     return 0;
 }
