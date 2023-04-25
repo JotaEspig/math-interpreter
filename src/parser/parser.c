@@ -25,7 +25,9 @@ ast_node_t *parser_generate_ast(parser_t *parser)
     if (parser == NULL)
         return NULL;
 
+    token_t *original_arr_ptr = parser->tokens->arr;
     ast_node_t *result = parser_parse_expr(parser);
+    parser->tokens->arr = original_arr_ptr;
     return result;
 }
 
@@ -44,7 +46,10 @@ ast_node_t *parser_parse_expr(parser_t *parser)
             next(parser);
             ast_node_t *right = parser_parse_term(parser);
             if (right == NULL)
+            {
+                delete_ast(result);
                 return NULL;
+            }
 
             result = new_plus_node(result, right);
         }
@@ -53,7 +58,10 @@ ast_node_t *parser_parse_expr(parser_t *parser)
             next(parser);
             ast_node_t *right = parser_parse_term(parser);
             if (right == NULL)
+            {
+                delete_ast(result);
                 return NULL;
+            }
 
             result = new_minus_node(result, right);
         }
@@ -77,7 +85,10 @@ ast_node_t *parser_parse_term(parser_t *parser)
             next(parser);
             ast_node_t *right = parser_parse_factor(parser);
             if (right == NULL)
+            {
+                delete_ast(result);
                 return NULL;
+            }
 
             result = new_multiply_node(result, right);
         }
@@ -86,7 +97,10 @@ ast_node_t *parser_parse_term(parser_t *parser)
             next(parser);
             ast_node_t *right = parser_parse_factor(parser);
             if (right == NULL)
+            {
+                delete_ast(result);
                 return NULL;
+            }
 
             result = new_divide_node(result, right);
         }
@@ -139,4 +153,9 @@ ast_node_t *parser_parse_factor(parser_t *parser)
     result = new_number_node(parser->current_token);
     next(parser);
     return result;
+}
+
+void delete_parser(parser_t *parser)
+{
+    free(parser);
 }

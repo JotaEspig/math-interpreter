@@ -11,6 +11,10 @@
 int main()
 {
     lexer_text_t buff = (lexer_text_t)malloc(sizeof(char) * 128);
+    token_list_t *tokens;
+    parser_t *parser;
+    ast_node_t *ast;
+    int result;
 
     printf("MATH INTERPRETER\n"
            "by: JotaEspig\n"
@@ -35,22 +39,31 @@ int main()
         }
 
         // TODO Prevent memory leaks
-        token_list_t *tokens = generate_tokens(buff);
+        tokens = generate_tokens(buff);
         //printf("TOKENS:\n");
         //token_list_print(tokens);
         //printf("\n");
 
-        parser_t *parser = new_parser(tokens);
-        ast_node_t *ast = parser_generate_ast(parser);
-        if (ast == NULL)
+        parser = new_parser(tokens);
+        ast = parser_generate_ast(parser);
+        if (ast != NULL)
+        {
+            result = evaluate_ast(ast);
+            printf("= %d\n", result);
+        }
+        else
         {
             printf("Invalid syntax\n");
-            continue;
         }
 
-        int result = evaluate_ast(ast);
-        printf("= %d\n", result);
+        if (tokens != NULL)
+            delete_token_list(tokens);
+        if (parser != NULL)
+            delete_parser(parser);
+        if (ast != NULL)
+            delete_ast(ast);
     }
 
+    free(buff);
     return 0;
 }

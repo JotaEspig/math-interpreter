@@ -69,12 +69,15 @@ token_list_t *generate_tokens(lexer_text_t text)
         }
         else
         {
+            delete_token_list(tokens);
             return NULL;
         }
 
-        tokens = token_list_append_token(tokens, token);
-        if (tokens == NULL)
+        if (token_list_append_token(tokens, token) == NULL)
+        {
+            delete_token_list(tokens);
             return NULL;
+        }
 
         *current_char = *text;
     }
@@ -82,7 +85,11 @@ token_list_t *generate_tokens(lexer_text_t text)
     token_t end_token;
     end_token.type = INVALID;
     end_token.value = 0;
-    tokens = token_list_append_token(tokens, end_token);
+    if (token_list_append_token(tokens, end_token) == NULL)
+    {
+        delete_token_list(tokens);
+        return NULL;
+    }
     return tokens;
 }
 

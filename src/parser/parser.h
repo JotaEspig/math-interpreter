@@ -20,4 +20,6 @@ ast_node_t *parser_parse_term(parser_t *parser);
 
 ast_node_t *parser_parse_factor(parser_t *parser);
 
+void delete_parser(parser_t *parser);
+
 #endif // PARSER_H
