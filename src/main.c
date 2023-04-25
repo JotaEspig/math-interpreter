@@ -34,7 +34,6 @@ int main()
 
         if (strcmp(buff, "") == 0)
         {
-            printf("Invalid input\n");
             continue;
         }
 
